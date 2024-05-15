@@ -4,6 +4,7 @@ import { UpdateContaDto } from './dto/update-conta.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Conta } from './entities/conta.entity';
 import { Repository } from 'typeorm';
+import { throwError } from 'rxjs';
 
 @Injectable()
 export class ContaService {
@@ -16,16 +17,23 @@ export class ContaService {
     return await this.contaRepository.save(createContaDto);
   }
 
-  async findAll() {
+  async findAll(): Promise<Conta[]> {
     return await this.contaRepository.find();
   }
 
-  async findOne(id: number) {
-    return `This action returns a #${id} conta`;
+  async findOne(id: number): Promise<Conta> {
+    return this.contaRepository.findOne({ where: { id } })
   }
 
   async update(id: number, updateContaDto: UpdateContaDto) {
-    return `This action updates a #${id} conta`;
+    const conta = await this.contaRepository.findBy({ id })
+    if (!conta) {
+      throw new Error("Sem resultados")
+    }    
+    
+    Object.assign(conta, updateContaDto)
+    
+    return this.contaRepository.save(conta);
   }
 
   async remove(id: number) {

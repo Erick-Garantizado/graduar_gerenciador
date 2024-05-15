@@ -1,9 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Injectable } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Injectable, Render } from '@nestjs/common';
 import { ContaService } from './conta.service';
 import { CreateContaDto } from './dto/create-conta.dto';
 import { UpdateContaDto } from './dto/update-conta.dto';
 
-@Injectable()
 @Controller('conta')
 export class ContaController {
   constructor(private readonly contaService: ContaService) {}
@@ -15,18 +14,23 @@ export class ContaController {
     return this.contaService.create(createContaDto);
   }
 
-  @Get()
+  @Get('lista')
+  @Render('lista')
   async findAll() {
-    return await this.contaService.findAll();
+    const lista = await this.contaService.findAll();
+    return { lista };
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.contaService.findOne(+id);
+  @Get('edit/:id')
+  @Render('edit')
+  async findOne(@Param('id') id: number) {
+    const conta = await this.contaService.findOne(id)
+    return { conta };
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateContaDto: UpdateContaDto) {
+  // @Patch('update/:id')
+  @Post('update/:id')
+  update(@Param('id') id: number, @Body() updateContaDto: UpdateContaDto) {
     return this.contaService.update(+id, updateContaDto);
   }
 

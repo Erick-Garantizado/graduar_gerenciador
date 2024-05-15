@@ -7,19 +7,18 @@
 </head>
 <body>
   <h1><a href="/">GERENCIADOR FINANCEIRO</a></h1>
-  <!-- alterar a action para a rota de edit -->
-  <form method="post" action="/conta" autocomplete="off">
+  <form method="post" action="/conta/update/<%= conta.id %>">
     <div>
       <label for="nome">Nome: </label>
-      <input type="text" name="nome" id="">
+      <input type="text" name="nome" id="" value= <%= conta.nome %> >
     </div>
     <div>
       <label for="valor">Valor</label>
-      <input type="number" name="valor" id="">
+      <input type="number" name="valor" id="" value= <%= conta.valor %>>
     </div>
     <div>
       <label for="vencimento">Vencimento</label>
-      <input type="date" name="vencimento">
+      <input type="date" name="vencimento" >
     </div>
     <div>
       <label for="">Conta fixa:</label>
@@ -30,10 +29,11 @@
     </div>
     <div>
       <label for="parcela" aria-disabled="true">Parcelas</label>
-      <input type="number" name="parcelas" id="parcelas" value="0">
+      <input type="number" name="parcelas" id="parcelas" value= <%= conta.parcelas %>>
     </div>
     <button type="submit">Registrar</button>
   </form>
+  
 
   <script>
     const radioSim = document.getElementById('sim');
