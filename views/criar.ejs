@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  <h1><a href="/">GERENCIADOR FINANCEIRO</a></h1>
+  <form method="post" action="/conta" autocomplete="off">
+    <div>
+      <label for="nome">Nome: </label>
+      <input type="text" name="nome" id="">
+    </div>
+    <div>
+      <label for="valor">Valor</label>
+      <input type="number" name="valor" id="">
+    </div>
+    <div>
+      <label for="vencimento">Vencimento</label>
+      <input type="date" name="vencimento">
+    </div>
+    <div>
+      <label for="">Conta fixa:</label>
+      <label for="sim">Sim</label>
+      <input type="radio" name="fixa" id="sim" value=true >
+      <label for="nao">Não</label>
+      <input type="radio" name="fixa" id="nao" value=false checked>
+    </div>
+    <div>
+      <label for="parcela" aria-disabled="true">Parcelas</label>
+      <input type="number" name="parcelas" id="parcelas" value="0">
+    </div>
+    <button type="submit">Registrar</button>
+  </form>
+
+  <script>
+    const radioSim = document.getElementById('sim');
+    const radioNao = document.getElementById('nao');
+    const numbParcela = document.getElementById('parcelas')
+    
+    radioSim.addEventListener('change', () => {
+      numbParcela.disabled = !this.checked;
+      console.log(!this.checked)
+    });
+    radioNao.addEventListener('change', () => {
+      numbParcela.disabled = this.checked;
+      console.log(this.checked)      
+    });
+  </script>
+</body>
+</html>

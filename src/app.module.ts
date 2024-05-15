@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common';
 import { ContaModule } from './app/conta/conta.module';
-import { ViewModule } from './app/view/view.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ViewModule } from './view/view.module';
 
 @Module({
   imports: [ContaModule, ViewModule,
     ConfigModule.forRoot({
-      envFilePath: '.env.development',
+      envFilePath: ".env.development.local"
     }),
     TypeOrmModule.forRoot({
       type: 'postgres',
