@@ -9,7 +9,7 @@ export class Conta {
     nome: String;
 
     @Column()
-    valor: number
+    valor: string
 
     @Column()
     vencimento: Date

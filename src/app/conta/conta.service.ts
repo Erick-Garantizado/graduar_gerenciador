@@ -31,9 +31,15 @@ export class ContaService {
       throw new Error("Sem resultados")
     }    
     
-    Object.assign(conta, updateContaDto)
+    conta.forEach(c => {
+      c.fixa = updateContaDto.fixa
+      c.nome = updateContaDto.nome
+      c.parcelas = updateContaDto.parcelas? Number(updateContaDto.parcelas) : 0
+      c.vencimento = updateContaDto.vencimento
+      c.valor = updateContaDto.valor.toString()
+    })
     
-    return this.contaRepository.save(conta);
+    return await this.contaRepository.save(conta);
   }
 
   async remove(id: number) {

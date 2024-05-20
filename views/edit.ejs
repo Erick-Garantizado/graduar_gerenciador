@@ -10,15 +10,15 @@
   <form method="post" action="/conta/update/<%= conta.id %>">
     <div>
       <label for="nome">Nome: </label>
-      <input type="text" name="nome" id="" value= <%= conta.nome %> >
+      <input type="text" name="nome" id="" value= <%= conta.nome %> required>
     </div>
     <div>
       <label for="valor">Valor</label>
-      <input type="number" name="valor" id="" value= <%= conta.valor %>>
+      <input type="text" name="valor" id="" value= <%= conta.valor %> required>
     </div>
     <div>
       <label for="vencimento">Vencimento</label>
-      <input type="date" name="vencimento" >
+      <input type="date" name="vencimento" required>
     </div>
     <div>
       <label for="">Conta fixa:</label>
