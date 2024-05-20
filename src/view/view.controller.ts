@@ -18,4 +18,8 @@ export class ViewController {
     // const conta = await this.contaController.findOne()
     return ;
   }
+
+  @Get('erro')
+  @Render('erro')
+  erro(){}
 }

@@ -1,7 +1,9 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Injectable, Render, Redirect } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, 
+  Delete, Injectable, Render, Redirect, Res } from '@nestjs/common';
 import { ContaService } from './conta.service';
 import { CreateContaDto } from './dto/create-conta.dto';
 import { UpdateContaDto } from './dto/update-conta.dto';
+import { Response } from 'express';
 
 @Controller('conta')
 export class ContaController {
@@ -30,10 +32,14 @@ export class ContaController {
 
   // @Patch('update/:id')
   @Post('update/:id')
-  async update(@Param('id') id: number, @Body() updateContaDto: UpdateContaDto) {
-    const res = await this.contaService.update(+id, updateContaDto);
+  async update(
+  @Param('id') id: number, 
+  @Body() updateContaDto: UpdateContaDto, 
+  @Res() res: Response
+  ) {
+    const resposta = await this.contaService.update(+id, updateContaDto);  
     
-    return {res}
+    return res.redirect("/conta/lista")
   }
 
   @Delete(':id')
